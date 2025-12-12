@@ -35,22 +35,3 @@ export const exportToCSV = (sales: Sale[]) => {
   link.click();
   document.body.removeChild(link);
 };
-
-export const syncToGoogleSheets = async (sales: Sale[], scriptUrl: string) => {
-  if (!scriptUrl) return { success: false, message: "กรุณาตั้งค่า Google Script URL" };
-
-  // Note: In a real environment, this connects to a Google Apps Script Web App deployed as API
-  // to bypass CORS and auth complexity on client-side purely.
-  try {
-    // Simulation of API call
-    console.log("Syncing to:", scriptUrl);
-    console.log("Data:", sales.length);
-    
-    // Fake delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    return { success: true, message: "ซิงค์ข้อมูลสำเร็จ (Simulated)" };
-  } catch (error) {
-    return { success: false, message: "เกิดข้อผิดพลาดในการเชื่อมต่อ" };
-  }
-};

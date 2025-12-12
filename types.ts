@@ -60,8 +60,7 @@ export interface UserProfile {
 
 export interface AppConfig {
   storeName: string;
-  googleSheetUrl: string; // Google Apps Script Web App URL for auto-sync
-  autoSync: boolean;
+  // Removed Google Sheet specific configs
 }
 
-export type ViewState = 'dashboard' | 'pos' | 'inventory' | 'customers' | 'analysis' | 'settings';
+export type ViewState = 'dashboard' | 'pos' | 'inventory' | 'customers' | 'transactions' | 'analysis' | 'settings';

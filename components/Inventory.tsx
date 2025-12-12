@@ -69,7 +69,7 @@ export const Inventory: React.FC = () => {
     <div className="p-6 bg-gray-50 min-h-full">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">จัดการสินค้า (Inventory)</h2>
-        <button onClick={() => openModal()} className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-700">
+        <button onClick={() => openModal()} className="bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-orange-700">
           <Plus size={18} className="mr-2"/> เพิ่มสินค้า
         </button>
       </div>
@@ -101,7 +101,7 @@ export const Inventory: React.FC = () => {
                     </span>
                 </td>
                 <td className="p-4 flex justify-center space-x-2">
-                  <button onClick={() => openModal(p)} className="p-2 text-blue-600 hover:bg-blue-50 rounded"><Edit size={16}/></button>
+                  <button onClick={() => openModal(p)} className="p-2 text-orange-600 hover:bg-orange-50 rounded"><Edit size={16}/></button>
                   <button onClick={() => handleDelete(p.id)} className="p-2 text-red-600 hover:bg-red-50 rounded"><Trash size={16}/></button>
                 </td>
               </tr>
@@ -121,30 +121,30 @@ export const Inventory: React.FC = () => {
             <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">ชื่อสินค้า</label>
-                    <input required type="text" className="w-full border rounded p-2" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                    <input required type="text" className="w-full border rounded p-2 focus:ring-2 focus:ring-orange-500 focus:outline-none" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">หมวดหมู่</label>
-                        <input type="text" className="w-full border rounded p-2" value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} />
+                        <input type="text" className="w-full border rounded p-2 focus:ring-2 focus:ring-orange-500 focus:outline-none" value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">บาร์โค้ด</label>
-                        <input type="text" className="w-full border rounded p-2" value={formData.barcode} onChange={e => setFormData({...formData, barcode: e.target.value})} />
+                        <input type="text" className="w-full border rounded p-2 focus:ring-2 focus:ring-orange-500 focus:outline-none" value={formData.barcode} onChange={e => setFormData({...formData, barcode: e.target.value})} />
                     </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">ราคาขาย</label>
-                        <input required type="number" className="w-full border rounded p-2" value={formData.price} onChange={e => setFormData({...formData, price: Number(e.target.value)})} />
+                        <input required type="number" className="w-full border rounded p-2 focus:ring-2 focus:ring-orange-500 focus:outline-none" value={formData.price} onChange={e => setFormData({...formData, price: Number(e.target.value)})} />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">ต้นทุน</label>
-                        <input required type="number" className="w-full border rounded p-2" value={formData.cost} onChange={e => setFormData({...formData, cost: Number(e.target.value)})} />
+                        <input required type="number" className="w-full border rounded p-2 focus:ring-2 focus:ring-orange-500 focus:outline-none" value={formData.cost} onChange={e => setFormData({...formData, cost: Number(e.target.value)})} />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">จำนวนสต็อก</label>
-                        <input required type="number" className="w-full border rounded p-2" value={formData.stock} onChange={e => setFormData({...formData, stock: Number(e.target.value)})} />
+                        <input required type="number" className="w-full border rounded p-2 focus:ring-2 focus:ring-orange-500 focus:outline-none" value={formData.stock} onChange={e => setFormData({...formData, stock: Number(e.target.value)})} />
                     </div>
                 </div>
                 <div>
@@ -160,7 +160,7 @@ export const Inventory: React.FC = () => {
                 
                 <div className="pt-4 flex space-x-3">
                     <button type="button" onClick={closeModal} className="flex-1 px-4 py-2 border rounded text-gray-600 hover:bg-gray-50">ยกเลิก</button>
-                    <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">บันทึก</button>
+                    <button type="submit" className="flex-1 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">บันทึก</button>
                 </div>
             </form>
           </div>

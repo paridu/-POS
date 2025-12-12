@@ -12,7 +12,8 @@ import { LayoutDashboard, ShoppingCart, Package, Users, BrainCircuit, Menu, X, S
 
 const App: React.FC = () => {
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [view, setView] = useState<ViewState>('dashboard');
+  // Change default view to 'pos'
+  const [view, setView] = useState<ViewState>('pos');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Check for existing session
@@ -31,7 +32,7 @@ const App: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem('pos_user');
     setUser(null);
-    setView('dashboard');
+    setView('pos'); // Reset to default view
   };
 
   const renderView = () => {
@@ -43,7 +44,7 @@ const App: React.FC = () => {
       case 'transactions': return <Transactions />;
       case 'analysis': return <AIAnalyst />;
       case 'settings': return <Settings user={user!} onLogout={handleLogout} />;
-      default: return <Dashboard />;
+      default: return <POS />; // Default to POS
     }
   };
 
@@ -90,8 +91,9 @@ const App: React.FC = () => {
         
         <div className="flex flex-col h-[calc(100%-5rem)] justify-between">
             <nav className="mt-6 flex-1 overflow-y-auto">
-              <NavItem id="dashboard" label="ภาพรวม" icon={LayoutDashboard} />
+              {/* Reordered Navigation: POS First */}
               <NavItem id="pos" label="ขายสินค้า" icon={ShoppingCart} />
+              <NavItem id="dashboard" label="ภาพรวม" icon={LayoutDashboard} />
               <NavItem id="inventory" label="คลังสินค้า" icon={Package} />
               <NavItem id="customers" label="ลูกค้า" icon={Users} />
               <NavItem id="transactions" label="ประวัติการขาย" icon={FileText} />

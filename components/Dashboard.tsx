@@ -1,22 +1,19 @@
 import React, { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { db } from '../services/mockDatabase';
-import { exportToCSV, syncToGoogleSheets } from '../services/googleSheetService';
-import { TrendingUp, Package, DollarSign, AlertTriangle, Download, RefreshCw } from 'lucide-react';
+import { exportToCSV } from '../services/googleSheetService';
+import { TrendingUp, Package, DollarSign, AlertTriangle, Download, Database } from 'lucide-react';
 
 export const Dashboard: React.FC = () => {
   const sales = db.getSales();
   const products = db.getProducts();
-
-  // Load config for sheet url
-  const config = JSON.parse(localStorage.getItem('pos_config') || '{}');
 
   // Calculate stats
   const totalRevenue = sales.reduce((sum, s) => sum + s.finalAmount, 0);
   const lowStockCount = products.filter(p => p.stock < 10).length;
   const totalSalesCount = sales.length;
 
-  // Prepare chart data (Last 7 days or simply by grouping dummy dates if mocking)
+  // Prepare chart data
   const salesByDate = useMemo(() => {
     const grouped: Record<string, number> = {};
     sales.forEach(sale => {
@@ -26,29 +23,22 @@ export const Dashboard: React.FC = () => {
     return Object.entries(grouped).map(([date, total]) => ({ date, total }));
   }, [sales]);
 
-  const handleSync = async () => {
-    if(!config.googleSheetUrl) return alert("กรุณาตั้งค่า Google Sheet URL ที่หน้าตั้งค่า");
-    const result = await syncToGoogleSheets(sales, config.googleSheetUrl);
-    alert(result.message);
-  }
-
   return (
     <div className="p-4 md:p-6 space-y-6 bg-gray-50 min-h-full pb-20 md:pb-6">
       <div className="flex flex-col md:flex-row justify-between md:items-center space-y-4 md:space-y-0">
-        <h2 className="text-2xl font-bold text-gray-800">แดชบอร์ดภาพรวม</h2>
+        <div>
+            <h2 className="text-2xl font-bold text-gray-800">แดชบอร์ดภาพรวม</h2>
+            <div className="flex items-center text-xs text-gray-500 mt-1">
+                <Database size={12} className="mr-1 text-green-600"/> Local Database (Offline Mode)
+            </div>
+        </div>
         
-        <div className="flex space-x-2">
-            <button 
-                onClick={handleSync}
-                className="flex items-center bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg text-sm hover:bg-gray-50 shadow-sm"
-            >
-                <RefreshCw size={16} className="mr-2"/> Sync Sheet
-            </button>
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
             <button 
                 onClick={() => exportToCSV(sales)}
-                className="flex items-center bg-green-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-700 shadow-sm"
+                className="flex items-center justify-center bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 shadow-sm transition-colors"
             >
-                <Download size={16} className="mr-2"/> Export CSV
+                <Download size={16} className="mr-2"/> Export Report (CSV)
             </button>
         </div>
       </div>
@@ -56,7 +46,7 @@ export const Dashboard: React.FC = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center">
-          <div className="p-4 bg-blue-100 rounded-full text-blue-600 mr-4">
+          <div className="p-4 bg-orange-100 rounded-full text-orange-600 mr-4">
             <DollarSign size={24} />
           </div>
           <div>
@@ -99,7 +89,7 @@ export const Dashboard: React.FC = () => {
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip formatter={(value) => `฿${value.toLocaleString()}`} />
-                <Line type="monotone" dataKey="total" stroke="#2563eb" strokeWidth={2} dot={{r: 4}} />
+                <Line type="monotone" dataKey="total" stroke="#ea580c" strokeWidth={2} dot={{r: 4}} />
               </LineChart>
             </ResponsiveContainer>
           </div>

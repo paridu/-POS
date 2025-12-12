@@ -52,6 +52,10 @@ export const db = {
     }
     save('pos_customers', customers);
   },
+  deleteCustomer: (id: string) => {
+    const customers = db.getCustomers().filter(c => c.id !== id);
+    save('pos_customers', customers);
+  },
 
   getSales: (): Sale[] => load('pos_sales', []),
   
@@ -125,5 +129,41 @@ export const db = {
       sales: db.getSales(),
       stockHistory: db.getStockHistory()
     };
+  },
+
+  // BACKUP SYSTEM
+  backupData: () => {
+    const data = {
+        products: db.getProducts(),
+        customers: db.getCustomers(),
+        sales: db.getSales(),
+        history: db.getStockHistory(),
+        config: JSON.parse(localStorage.getItem('pos_config') || '{}'),
+        timestamp: new Date().toISOString()
+    };
+    return JSON.stringify(data, null, 2);
+  },
+
+  restoreData: (jsonString: string) => {
+    try {
+        const data = JSON.parse(jsonString);
+        if(data.products) save('pos_products', data.products);
+        if(data.customers) save('pos_customers', data.customers);
+        if(data.sales) save('pos_sales', data.sales);
+        if(data.history) save('pos_history', data.history);
+        if(data.config) save('pos_config', data.config);
+        return true;
+    } catch (e) {
+        console.error("Restore failed", e);
+        return false;
+    }
+  },
+  
+  clearDatabase: () => {
+      localStorage.removeItem('pos_products');
+      localStorage.removeItem('pos_sales');
+      localStorage.removeItem('pos_customers');
+      localStorage.removeItem('pos_history');
+      // Keep config and user
   }
 };

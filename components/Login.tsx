@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserProfile } from '../types';
 
 interface LoginProps {
@@ -12,7 +12,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
       id: 'google_123',
       name: 'Admin User',
       email: 'admin@prachantakham.com',
-      imageUrl: 'https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff'
+      imageUrl: 'https://ui-avatars.com/api/?name=Admin+User&background=FB923C&color=fff'
     };
     
     // Simulate network delay
@@ -24,9 +24,9 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden">
-        <div className="bg-blue-600 p-8 text-center">
+        <div className="bg-orange-600 p-8 text-center">
           <h1 className="text-3xl font-bold text-white mb-2">ประจันตคามขายดี</h1>
-          <p className="text-blue-100">ระบบจัดการร้านค้าอัจฉริยะ</p>
+          <p className="text-orange-100">ระบบจัดการร้านค้าอัจฉริยะ</p>
         </div>
         
         <div className="p-8">

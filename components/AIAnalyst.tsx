@@ -30,11 +30,11 @@ export const AIAnalyst: React.FC = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-2rem)] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden m-4">
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 text-white flex items-center">
+      <div className="bg-gradient-to-r from-orange-500 to-red-600 p-4 text-white flex items-center">
         <Bot size={24} className="mr-3" />
         <div>
             <h2 className="font-bold">AI Business Analyst</h2>
-            <p className="text-xs text-indigo-100">Powered by Gemini 2.5 Flash</p>
+            <p className="text-xs text-orange-100">Powered by Gemini 2.5 Flash</p>
         </div>
       </div>
 
@@ -43,7 +43,7 @@ export const AIAnalyst: React.FC = () => {
           <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
               msg.role === 'user' 
-                ? 'bg-blue-600 text-white rounded-br-none' 
+                ? 'bg-orange-600 text-white rounded-br-none' 
                 : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
             }`}>
               {msg.text.split('\n').map((line, i) => <p key={i} className="mb-1">{line}</p>)}
@@ -53,7 +53,7 @@ export const AIAnalyst: React.FC = () => {
         {loading && (
           <div className="flex justify-start">
             <div className="bg-white border border-gray-200 p-3 rounded-2xl rounded-bl-none shadow-sm flex items-center">
-              <Loader size={16} className="animate-spin text-indigo-600 mr-2" />
+              <Loader size={16} className="animate-spin text-orange-600 mr-2" />
               <span className="text-sm text-gray-500">กำลังวิเคราะห์ข้อมูล...</span>
             </div>
           </div>
@@ -64,7 +64,7 @@ export const AIAnalyst: React.FC = () => {
         <div className="flex space-x-2">
           <input
             type="text"
-            className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
             placeholder="ถามเกี่ยวกับยอดขาย หรือสต็อก..."
             value={input}
             onChange={e => setInput(e.target.value)}
@@ -73,7 +73,7 @@ export const AIAnalyst: React.FC = () => {
           <button 
             onClick={handleSend}
             disabled={loading}
-            className="bg-indigo-600 text-white p-2 rounded-full hover:bg-indigo-700 disabled:opacity-50"
+            className="bg-orange-600 text-white p-2 rounded-full hover:bg-orange-700 disabled:opacity-50"
           >
             <Send size={20} />
           </button>
