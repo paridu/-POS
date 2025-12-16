@@ -56,6 +56,7 @@ export interface UserProfile {
   name: string;
   email: string;
   imageUrl: string;
+  role: 'admin' | 'staff'; // Added role
 }
 
 export interface AppConfig {
